@@ -58,11 +58,11 @@ module Fog
         #
         # @return [File]
         #
-        def body
+        def body(options = {})
           return attributes[:body] if attributes[:body]
           return '' unless last_modified
 
-          file = collection.get(identity)
+          file = collection.get(identity, options)
           if file
             attributes[:body] = file.body
           else

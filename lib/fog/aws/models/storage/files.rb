@@ -58,6 +58,7 @@ module Fog
 
         def get(key, options = {}, &block)
           requires :directory
+          options.merge!(options[:headers]) if options[:headers]
           data = service.get_object(directory.key, key, options, &block)
           normalize_headers(data)
           file_data = data.headers.merge({
@@ -98,6 +99,7 @@ module Fog
 
         def head(key, options = {})
           requires :directory
+          options.merge!(options[:headers]) if options[:headers]
           data = service.head_object(directory.key, key, options)
           normalize_headers(data)
           file_data = data.headers.merge({
